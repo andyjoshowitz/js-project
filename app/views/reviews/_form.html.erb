@@ -1,0 +1,30 @@
+<% if review.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+            <ul>
+                <% review.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+<h2>Review of <%= @course.title %></h2>
+<%= form_for([ :course, review]) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :course_id, value: @course.id %>
+  <label>How difficult was this course? (Enter 1 - 5)</label>
+  <%= f.text_field :difficulty %><br>
+  <label>What was the quality of this course's instructor (Professor <%= @course.instructor_name%>)? (Enter 1 - 5)</label>
+  <%= f.text_field :instructor_quality %><br>
+  <label>How much did you learn from this course? (Enter 1 - 5)</label>
+  <%= f.text_field :amount_learned %><br>
+  <label>How much work did this course require? (Enter 1 - 5)</label>
+  <%= f.text_field :work_amount %><br>
+  <label>What was the overall quality of this course? (Enter 1 - 5)</label>
+  <%= f.text_field :course_quality %><br>
+
+  <label>Comments</label><br>
+  <%= f.text_area :comment %><br>
+      <%= f.submit %>
+      <%= link_to "Back to course", course_path(@course) %>
+<% end %>
