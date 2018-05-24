@@ -1,0 +1,39 @@
+<% if @instructor.errors.any? %>
+      <div id="error_explanation">
+          <h2><%= pluralize(@instructor.errors.count, "error") %> prohibited this instructor from being saved:</h2>
+          <ul>
+              <% @instructor.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          </ul>
+      </div>
+  <% end %>
+
+<%= form_for @instructor do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :first_name %><br>
+  <%= f.text_field :first_name %>
+  <br>
+  <%= f.label :second_name, "Last Name" %><br>
+  <%= f.text_field :second_name %>
+  <br>
+  <fieldset>
+    <legend>Add Course (optional)</legend>
+    <%= f.fields_for :courses, @instructor.courses do |course_fields| %>
+    <%= course_fields.hidden_field :user_id, value: current_user.id %>
+      <%= course_fields.label :title %><br>
+      <%= course_fields.text_field :title %>
+      <br>
+      <%= course_fields.label :department %><br>
+      <%= course_fields.text_field :department%>
+      <br>
+      <%= course_fields.label :course_number %><br>
+      <%= course_fields.text_field :course_number %>
+      <br>
+      <%= course_fields.label :description %><br>
+      <%= course_fields.text_area :description %>
+    <% end %>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,29 @@
+<% if @instructor.errors.any? %>
+      <div id="error_explanation">
+          <h2><%= pluralize(@instructor.errors.count, "error") %> prohibited this activity from being saved:</h2>
+          <ul>
+              <% @instructor.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          </ul>
+      </div>
+  <% end %>
+<%= form_for @instructor do |f| %>
+  <%= f.fields_for :courses, @instructor.courses.build do |course| %>
+  <%= course.hidden_field :user_id, value: current_user.id %>
+  <h3>New Course for <%= @instructor.full_name%> </h3>
+    <%= course.label :title %><br>
+    <%= course.text_field :title %>
+    <br>
+    <%= course.label :department %><br>
+    <%= course.text_field :department %>
+    <br>
+    <%= course.label :course_number %><br>
+    <%= course.text_field :course_number %>
+    <br>
+    <%= course.label :description %><br>
+    <%= course.text_area :description %>
+  <% end %>
+  <br>
+  <%= f.submit %>
+<% end %>

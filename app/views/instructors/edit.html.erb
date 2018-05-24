@@ -1,0 +1,11 @@
+
+<%= form_for @instructor do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :first_name %><br>
+  <%= f.text_field :first_name %>
+  <br>
+  <%= f.label :second_name, "Last Name" %><br>
+  <%= f.text_field :second_name %>
+  <br>
+  <%= f.submit %>
+<% end %>
