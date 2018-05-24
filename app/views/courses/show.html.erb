@@ -1,0 +1,39 @@
+<div class="course-header">
+  <h1><%= @course.title %> (<%= @course.department %>-<%= @course.course_number %>)</h1>
+</div>
+<h3>Instructor: <%= @course.instructor_name%></h3>
+
+<p><%= @course.description %></p>
+    <%= link_to "Edit course", edit_course_path(@course) if current_user.try(:admin?) || @course.user_id == current_user.try(:id) %><br>
+    <%= link_to "All courses", courses_path, class: "btn btn-outline-dark" %>
+
+<h3>Reviews</h3>
+
+<%= link_to "Write a review", new_course_review_path(@course)%>
+
+    <p>Overall Ratings</p>
+    <ul>
+      <li> Average Difficulty: <%= @course.avg_difficulty %></li>
+      <li> Instructor Quality: <%= @course.instructor_quality %></li>
+      <li> Workload: <%= @course.work_amount %></li>
+      <li> Amount Learned: <%= @course.amount_learned %></li>
+      <li> Overall Quality: <%= @course.overall_quality %></li>
+    </ul>
+
+  <br>
+
+  <% @course.reviews.each do |review| %>
+    <div class="review-box card rounded">
+      <h4>Ratings</h4>
+        <p>Course Difficulty: <%=review.difficulty%> | Instructor Quality: <%=review.instructor_quality%> | Amount Learned: <%=review.amount_learned%></li> | Workload: <%=review.work_amount%></li> | Course Quality: <%=review.course_quality%></p>
+      <h4>Comment</h4>
+        <p><%= review.comment %></p>
+      <p><%= review.user.email %> | <%= last_updated review %></p>
+    </div>
+    <% if current_user == review.user %>
+      <%= link_to "Edit your review", edit_course_review_path(id: review.id, course_id: @course.id) %>
+       |
+      <%= link_to "Delete your review", course_review_path(@course, review), :method => :delete %>
+    <% end %>
+    <br><br>
+  <% end %>

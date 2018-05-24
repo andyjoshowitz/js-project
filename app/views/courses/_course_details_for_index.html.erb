@@ -1,0 +1,26 @@
+<ol>
+  <% @courses.each do |course| %>
+    <li><h3><%= course.full_title(course.title, course.department, course.course_number)%></h3>
+      <h5><%= course.instructor_name %></h5>
+  <p class="card-text"><%= truncate course.description, length: 50 %></p>
+      <div class="card-body">
+        <% if course.overall_quality == "No reviews" %>
+          No reviews
+        <% else %>
+          <% course.overall_quality.floor.times do %>
+          <% end %>
+          <% if course.overall_quality - course.overall_quality.floor > 0.25 && course.overall_quality - course.overall_quality.floor < 0.75 %>
+          <% elsif course.overall_quality - course.overall_quality.floor > 0.75 %>
+          <% end %>
+          <% (5 - course.overall_quality).floor.times do %>
+          <% end %>
+        <% end %>
+      </div>
+        <div class="btn-group">
+          <%= button_to "View", course_path(course), method: :get, class: "btn btn-sm btn-outline-secondary" unless params[:action] == 'show' && params[:controller] == 'courses' %>
+          <%= button_to "Edit", edit_course_path(course), method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || course.user_id == current_user.try(:id) %>
+        </div>
+        <br>
+        <small class="text-muted">Last updated: <%= course.updated_at.strftime("%m/%d/%Y") %></small>
+  <% end %></li>
+  </ol>

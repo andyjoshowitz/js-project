@@ -1,0 +1,48 @@
+<%= form_for course do |f| %>
+  <% if course.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(course.errors.count, "error") %> prohibited this activity from being saved:</h2>
+            <ul>
+                <% course.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+      <br>
+      <%= f.label :Department %><br>
+      <%= f.text_field :department, placeholder: "4 letter abbreviation" %>
+      <br>
+      <%= f.label :course_number %><br>
+      <%= f.text_field :course_number, placeholder: "must be 3 numbers" %>
+      <br>
+      <%= f.label :Description %><br>
+      <%= f.text_area :description %>
+      <br>
+      <fieldset>
+        <legend>Instructor</legend>
+        <%= f.fields_for :instructors do |instructor| %>
+        <%= instructor.hidden_field :user_id, value: current_user.id %>
+
+        <%= content_tag(:strong, "Either select an instructor or add a new one (below):") %>
+
+        <%= instructor.collection_check_boxes(:instructor_ids, Instructor.all, :id, :second_name) do |b| %>
+          <br><%= b.label(class: "label-checkbox") { b.check_box + b.object.second_name}%>
+        <% end %>
+        <br><br>
+          <%= instructor.label :first_name %><br>
+          <%= instructor.text_field :first_name %>
+          <br>
+          <%= instructor.label :second_name, "Last Name" %><br>
+          <%= instructor.text_field :second_name %>
+        <% end %>
+      </fieldset>
+    <br>
+    <%= f.submit %>
+<% end %>
+<br>
+<%= button_to "Delete Course", course, :method => :delete, class: "btn btn-outline-danger" if !!course.id && (current_user.try(:admin?) || current_user.id == course.user_id) %>
