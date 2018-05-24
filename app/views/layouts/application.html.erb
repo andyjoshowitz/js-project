@@ -17,7 +17,9 @@
   <%= link_to "See all courses", courses_path %> |
   <%= link_to "New instructor", new_instructor_path %> |
   <%= link_to "See all instructors", instructors_path %> |
-  <%= link_to "Your Profile", user_profile_path(current_user) %> |
+  <% if user_signed_in? %>
+    <%= link_to "Your Profile", user_profile_path(current_user) %> |
+  <% end %>
   <br>
   <small><%= link_to "Homepage", welcome_home_path %></small>
     |
