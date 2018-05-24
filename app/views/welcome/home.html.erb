@@ -1,0 +1,20 @@
+<main role="main">
+  <h1>Welcome to Course Reviewer!</h1>
+  <br>
+  <h2>Recently Added Courses</h2>
+  <ol>
+    <% @newest_courses.each do |course| %>
+      <li> <%= link_to course.full_title, course_path(course)%></li>
+    <% end %>
+  </ol>
+
+  <h2>Most Popular Courses</h2>
+  <ol>
+    <% @most_popular_courses.each do |course| %>
+      <li> <%= link_to course.full_title, course_path(course)%></li>
+    <% end %>
+  </ol>
+
+  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+
+</main>
