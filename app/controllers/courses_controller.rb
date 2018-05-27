@@ -1,4 +1,4 @@
-class ActivitiesController < ApplicationController
+class CoursesController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   before_action :authorize, only: [:edit, :update, :destroy]
 
@@ -13,11 +13,13 @@ class ActivitiesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @reviews = @course.reviews
+    #@review = @course.reviews.build
     # @reviews = @course.reviews.reverse
     respond_to do |f|
       f.html {render :show}
       f.json {render json: @course, status: 200}
     end
+    #render json: @course, status: 200
   end
 
   def new
@@ -37,8 +39,8 @@ class ActivitiesController < ApplicationController
   #end
 
   def edit
-    @activity = Activity.find_by(id: params[:id])
-    @activity.build_location() unless @activity.location
+    @course = Course.find_by(id: params[:id])
+    @course.build_instructor() unless @course.instructor
   end
 
   def update
@@ -55,6 +57,15 @@ class ActivitiesController < ApplicationController
     @course = Course.find_by(id: params[:id])
     @course.destroy
     redirect_to root_path
+  end
+
+  def new_review
+    @review = @course.reviews.build(review_params) #in video build create method in review controller and might need to add review_params in here
+    if @review.save
+      render 'reviews/show', :layout => false
+    else
+      render "courses/show"
+    end
   end
 
   private

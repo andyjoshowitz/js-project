@@ -1,5 +1,3 @@
-<h1>Reviews for <%= link_to @course.full_title, course_path(@course) %></h1>
-<!-- display reviews or 'no reviews' content -->
 <% @reviews.each do |review| %>
   <div class="review-box card rounded">
     <h4>Ratings</h4>
@@ -15,5 +13,3 @@
   <% end %>
   <br><br>
 <% end %>
-
-<!-- add rating form -->

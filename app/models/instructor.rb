@@ -1,5 +1,5 @@
 class Instructor < ApplicationRecord
-  has_many :reviews, through: :courses
+  #has_many :reviews, through: :courses
   has_many :courses
   accepts_nested_attributes_for :courses
   validates_presence_of :first_name, :second_name

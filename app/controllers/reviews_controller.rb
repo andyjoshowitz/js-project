@@ -1,14 +1,16 @@
 class ReviewsController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:index, :show]
-   before_action :authorize, only: [:edit, :update, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
+  before_action :set_course
 
   def index
-    @reviews = Review.where(course_id = params[:id])
-    respond_to do |f|
-      f.html {render :index}
-      f.json { render json: @reviews, status:200 }
-      # f.json {raise params.inspect}
+    #@reviews = Review.where(course_id = params[:id])
+    @reviews = @course.reviews
+  	# render :json => @reviews
+    respond_to do |format|
+      format.html {render :index}
+      format.json { render json: @reviews, status:200 }
     end
   end
 
@@ -18,14 +20,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @course = @review.course
+    @review = @course.reviews.build(review_params)
     # render json: @review, status: 201
     if @review.save
-      render json: @review, status: 201
-      # redirect_to @review.course
+    #  render json: @review, status: 201
+      redirect_to @course
     else
-      render json: @review.errors
+      # render json: @review.errors
+      render 'courses/show'
     end
   end
 
@@ -49,10 +51,15 @@ class ReviewsController < ApplicationController
     @course = Course.find_by(id: params[:course_id])
     @review = Review.find_by(id: params[:id])
     @review.destroy
-    redirect_to @activity
+    redirect_to @course
   end
 
   private
+
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
+
 
   def review_params
     params.require(:review).permit(:difficulty, :course_quality, :instructor_quality, :amount_learned, :work_amount, :comment, :user_id, :course_id, :instructor_id)

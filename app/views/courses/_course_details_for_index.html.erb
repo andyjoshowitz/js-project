@@ -1,6 +1,6 @@
 <ol>
   <% @courses.each do |course| %>
-    <li><h3><%= course.full_title(course.title, course.department, course.course_number)%></h3>
+    <li><h3><%= course.full_title%></h3>
       <h5><%= course.instructor_name %></h5>
   <p class="card-text"><%= truncate course.description, length: 50 %></p>
       <div class="card-body">

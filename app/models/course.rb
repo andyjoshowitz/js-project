@@ -24,7 +24,7 @@ class Course < ApplicationRecord
     order(created_at: :desc)
   end
 
-  def full_title(title, department, course_number)
+  def full_title
     self.title + " " + "(" + self.department + "-" + self.course_number.to_s + ")"
   end
 

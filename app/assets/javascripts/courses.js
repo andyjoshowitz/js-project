@@ -1,81 +1,83 @@
-class Course {
-  constructor(attributes) {
-    this.id = attributes.id;
-    this.title = attributes.title
-    this.description = attributes.description
-    this.department = attributes.department
-    this.course_number = attributes.course_number
-    this.reviews = attributes.reviews
-  }
-}
-
-
-Course.prototype.renderCourse = function(){
-  return Course.template(this)
-}
 
 $(function(){
-  Handlebars.registerPartial('coursePartial', document.getElementById('course-partial').innerHTML);
-  Handlebars.registerHelper('limit', function(arr, limit){
-    return arr.slice(0,limit)
-  })
-  // Course.templateSource = $("#course-template").html();
-  // Course.template = Handlebars.compile(Course.templateSource);
-   // attachCourseListeners()
-})
-
-document.addEventListener("turbolinks:load", function() {
-  $("#review_form_btn").click(function(e){
+  $(“a.load_reviews”).on(“click”, function(e){
+    $.get(this.href).success(function(json){
+      var $ol = $(“div.reviews ol”)
+      $ol.html(“”)
+      json.forEach(function(review){
+        $ol.append("<li>" + review.course_quality + "</li>");
+      })
+    })
     e.preventDefault();
-    displayReviewForm();
-  });
-  $("#remove_form").click(function(e){
-    e.preventDefault();
-    removeForm();
   })
 })
 
-// function attachCourseListeners(){
-//   $("#review_form_btn").click(function(e){
-//     e.preventDefault();
-//     displayReviewForm();
-//   });
-//   $("#remove_form").click(function(e){
-//     e.preventDefault();
-//     removeForm();
-//   })
-//   // $("button[data-id]").click(function(e){
-//   //   let $locButton = $(this)
-//   //   displayLocCourses($locButton)
-//   // })
-// }
+$(function(){
+  $("#new_review").on("submit", function(e){
+    $.ajax({
+      method: "POST",
+      url: this.action,
+      data: $(this).serialize();,
+      dataType: "json",
+      success: function(response){
+        $("review_comment").val("");
+        var $ol = $(“div.reviews ol”)
+        $ol.append(response);
+      }
+    });
+    e.preventDefault();
+  })
+});
 
-function displayReviewForm(){
-  $("#review_form_placeholder").show()
-  $("#review_form_btn").toggle();
+$(function(){
+  $.ajaxSetup({
+        cache: false,
+    });
+    $.get(this.href).success(function(json){
+      var courses = $(".courses")
+      courses.html("")
+      json.forEach(function(course){
+        text = '<a class="js-course-show" href="/courses/' + course.id + '">' + course.title + '</a>';
+        text += '<p class="course-meta">' + 'by' + ' ' + story.user.email + ' ' +'-' + ' ' + courses.created_at +
+                ' ' + '<span class="badge">' + course.reviews_count + ' ' +'reviews' + '</span></p>';
+        text += '<p>' + course.description.substring(0, 50) + '...';
+        text += '<a class="js-course-show" href="/courses/' + course.id+ '">Read More</a></p>';
+        $courses.append(text);
+      })
+   })
+})
+
+
+var Course = function(attributes) {
+  this.id = course.id
+  this.title = course.title
+  this.course_number = course.course_number
+  this.department = course.department
+  this.description = course.description
+  this.reviews = attributes.reviews;
+  this.user = attributes.user;
+};
+
+Course.prototype.renderCourse = function() {
+  var text = "";
+  text = '<h2 class="course-title">' + this.title + '</h2>';
+  text += '<p class="course-meta">' + 'by' + ' ' + this.user.email + ' ' +'-' + ' ' + this.created_at + ' ' + '</p>';
+  text += '<p class="course-description">' + this.description + '</p>';
+  return text;
+};
+
+var getCourse = function() {
+    $.ajax({
+      url: this.href,
+      method: "GET",
+      dataType: "json",
+    }).success(function(json){
+      var course = new Course(json)
+      var renderCourse = course.renderCourse();
+      $("#showcourse").append(renderCourse);
+    })
 }
 
-function removeForm(){
-  $("#review_form_placeholder").hide();
-  $("#review_form_btn").toggle()
-}
-
-// function displayLocCourses(instructor){
-//   let instructorId = instructor.attr('data-id')
-//   $(`#instructorCard${instructorId}`).after("<div><p>Hi.</p></div>")
-// }
-
-
-// function submitNewReview($form){
-//   var action = $form.attr("action");
-//   var params = $form.serialize()
-//
-//   let posting = $.post(action, params)
-//   posting.done(function(json){
-//     console.log(json)
-//     let review = new Review()
-//   })
-// }
-// document.addEventListener("DOMContentLoaded", function(e){
-//   init()
-// })
+$(document).ready(function() {
+  getCourse();
+})

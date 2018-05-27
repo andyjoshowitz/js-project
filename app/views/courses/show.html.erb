@@ -1,5 +1,11 @@
+<p id="notice"><%= notice %></p>
+
 <div class="course-header">
   <h1><%= @course.title %> (<%= @course.department %>-<%= @course.course_number %>)</h1>
+</div>
+
+<div id="showcourse">
+
 </div>
 <h3>Instructor: <%= @course.instructor_name%></h3>
 
@@ -9,31 +15,45 @@
 
 <h3>Reviews</h3>
 
-<%= link_to "Write a review", new_course_review_path(@course)%>
+<p>Overall Ratings</p>
+  <ul>
+    <li> Average Difficulty: <%= @course.avg_difficulty %></li>
+    <li> Instructor Quality: <%= @course.instructor_quality %></li>
+    <li> Workload: <%= @course.work_amount %></li>
+    <li> Amount Learned: <%= @course.amount_learned %></li>
+    <li> Overall Quality: <%= @course.overall_quality %></li>
+  </ul>
 
-    <p>Overall Ratings</p>
-    <ul>
-      <li> Average Difficulty: <%= @course.avg_difficulty %></li>
-      <li> Instructor Quality: <%= @course.instructor_quality %></li>
-      <li> Workload: <%= @course.work_amount %></li>
-      <li> Amount Learned: <%= @course.amount_learned %></li>
-      <li> Overall Quality: <%= @course.overall_quality %></li>
-    </ul>
+<br>
 
-  <br>
+<!-- <%= link_to "Write a review", new_course_review_path(@course), :class => "new_review", :remote => true %> | -->
+<%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews", :remote  => true %>
 
-  <% @course.reviews.each do |review| %>
-    <div class="review-box card rounded">
-      <h4>Ratings</h4>
-        <p>Course Difficulty: <%=review.difficulty%> | Instructor Quality: <%=review.instructor_quality%> | Amount Learned: <%=review.amount_learned%></li> | Workload: <%=review.work_amount%></li> | Course Quality: <%=review.course_quality%></p>
-      <h4>Comment</h4>
-        <p><%= review.comment %></p>
-      <p><%= review.user.email %> | <%= last_updated review %></p>
-    </div>
-    <% if current_user == review.user %>
-      <%= link_to "Edit your review", edit_course_review_path(id: review.id, course_id: @course.id) %>
-       |
-      <%= link_to "Delete your review", course_review_path(@course, review), :method => :delete %>
-    <% end %>
-    <br><br>
+<div class=“reviews”>
+  <ol>
+  </ol>
+</div>
+
+<!-- <div class="reviews">
+  <%= render 'reviews/reviews' %>
+</div> -->
+
+<%= form_for([@course, @course.reviews.build]) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :course_id, value: @course.id %>
+  <label>How difficult was this course? (Enter 1 - 5)</label>
+  <%= f.text_field :difficulty %><br>
+  <label>What was the quality of this course's instructor (Professor <%= @course.instructor_name%>)? (Enter 1 - 5)</label>
+  <%= f.text_field :instructor_quality %><br>
+  <label>How much did you learn from this course? (Enter 1 - 5)</label>
+  <%= f.text_field :amount_learned %><br>
+  <label>How much work did this course require? (Enter 1 - 5)</label>
+  <%= f.text_field :work_amount %><br>
+  <label>What was the overall quality of this course? (Enter 1 - 5)</label>
+  <%= f.text_field :course_quality %><br>
+
+  <label>Comments</label><br>
+  <%= f.text_area :comment %><br>
+      <%= f.submit %>
+      <%= link_to "Back to course", course_path(@course) %>
   <% end %>
