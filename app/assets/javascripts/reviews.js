@@ -7,10 +7,13 @@ $(function(){
       data: $(this).serialize(),
       dataType: "json",
       success: function(json){
-        var $ol = $("div.reviews ol")
-        $ol.html("")
-        json.forEach(function(review){
-          $ol.append("<li>" + review.course_quality + "</li>");
+        console.log(json)
+        /*console.log(json.reviews)
+        $("div.reviews ol")
+        // orderedList.html("")
+        console.log(orderedList.html(""))*/
+        json.reviews.forEach(function(review){
+          $("#new").append(`<li><a href="http://localhost:3000/courses/${json.id}/reviews/${review.id}">${review.course_quality}</li>`);
         })
       }
     })
@@ -18,25 +21,24 @@ $(function(){
 })
 
 
-$(function(){
+function createReview(){
   $("#new_review").on("submit", function(e){
-    e.preventDefault();
     $.ajax({
       method: "POST",
       url: this.action,
       data: $(this).serialize(),
       dataType: "json",
       success: function(response){
-        $("review_comment").val("");
-        var $ol = $("div.reviews ol");
-        $ol.append(response);
+        // $("review_comment").val("");
+         $("#test").append(response);
       }
     });
+    e.preventDefault();
   })
-});
+};
 
 
-var Review = function(attributes) {
+/* var Review = function(attributes) {
   this.id = attributes.id;
   this.difficulty = attributes.difficulty;
   this.course_quality = attributes.course_quality;
@@ -65,7 +67,7 @@ Review.prototype.renderReview = function() {
   return html;
 };
 
- var attachListener = function() {
+/*  var attachListener = function() {
     $(document).on('submit', 'form#new_review', function(event){
     event.preventDefault();
     var $form = $(this);
@@ -75,16 +77,16 @@ Review.prototype.renderReview = function() {
       url: action,
       data: params,
       dataType: "json",
-      method: "POST"
-    }).success(function(json) {
+      method: "POST",
+      success: (function(json) {
       $(".reviewText").val("");
       var review = new Review(json);
       var renderReview = review.renderReview();
       $("#reviewSection").append(renderReview);
       });
     });
-}
+}*/
 
 $(document).ready(function() {
-  attachListener();
+  createReview();
 });

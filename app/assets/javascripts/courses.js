@@ -1,35 +1,9 @@
 
-$(function(){
-  $(“a.load_reviews”).on(“click”, function(e){
-    $.get(this.href).success(function(json){
-      var $ol = $(“div.reviews ol”)
-      $ol.html(“”)
-      json.forEach(function(review){
-        $ol.append("<li>" + review.course_quality + "</li>");
-      })
-    })
-    e.preventDefault();
-  })
-})
 
-$(function(){
-  $("#new_review").on("submit", function(e){
-    $.ajax({
-      method: "POST",
-      url: this.action,
-      data: $(this).serialize();,
-      dataType: "json",
-      success: function(response){
-        $("review_comment").val("");
-        var $ol = $(“div.reviews ol”)
-        $ol.append(response);
-      }
-    });
-    e.preventDefault();
-  })
-});
 
-$(function(){
+
+
+/*$(function(){
   $.ajaxSetup({
         cache: false,
     });
@@ -80,4 +54,4 @@ var getCourse = function() {
 
 $(document).ready(function() {
   getCourse();
-})
+})*/

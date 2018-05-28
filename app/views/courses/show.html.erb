@@ -27,16 +27,14 @@
 <br>
 
 <!-- <%= link_to "Write a review", new_course_review_path(@course), :class => "new_review", :remote => true %> | -->
-<%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews", :remote  => true %>
+<%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews" %>
 
 <div class=“reviews”>
-  <ol>
+  <ol id="test">
   </ol>
 </div>
 
-<!-- <div class="reviews">
-  <%= render 'reviews/reviews' %>
-</div> -->
+
 
 <%= form_for([@course, @course.reviews.build]) do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>

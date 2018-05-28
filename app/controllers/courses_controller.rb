@@ -4,6 +4,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
+
     respond_to do |f|
       f.html {render :index}
       f.json {render json: @courses, status: 200}
@@ -12,6 +13,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    #binding.pry
     @reviews = @course.reviews
     #@review = @course.reviews.build
     # @reviews = @course.reviews.reverse

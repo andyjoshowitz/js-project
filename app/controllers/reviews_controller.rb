@@ -14,6 +14,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def show
+    @review = Review.find_by(id: params[:id])
+    #binding.pry
+  end
+
   def new
     @course = Course.find(params[:course_id])
     @review = Review.new
