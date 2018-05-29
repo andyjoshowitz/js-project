@@ -10,6 +10,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w( reviews_courses.js )
 Rails.application.config.assets.precompile += %w( courses_index.js )
+Rails.application.config.assets.precompile += %w( reviews.js )
+Rails.application.config.assets.precompile += %w( reviews_show.js )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets

@@ -591,3 +591,23 @@ $(function(){
   	var coursetHtml = `<li>Department: ${this.department}, Description: ${this.description}</li>`
   	return courseHtml;
   };
+
+  <h1>Reviews for <%= link_to @course.full_title, course_path(@course) %></h1>
+  <!-- display reviews or 'no reviews' content -->
+  <% @reviews.each do |review| %>
+    <div class="review-box card rounded">
+      <h4>Ratings</h4>
+        <p>Course Difficulty: <%=review.difficulty%> | Instructor Quality: <%=review.instructor_quality%> | Amount Learned: <%=review.amount_learned%></li> | Workload: <%=review.work_amount%></li> | Course Quality: <%=review.course_quality%></p>
+      <h4>Comment</h4>
+        <p><%= review.comment %></p>
+      <p><%= review.user.email %> | <%= last_updated review %></p>
+    </div>
+    <% if current_user == review.user %>
+      <%= link_to "Edit your review", edit_course_review_path(id: review.id, course_id: @course.id) %>
+       |
+      <%= link_to "Delete your review", course_review_path(@course, review), :method => :delete %>
+    <% end %>
+    <br><br>
+  <% end %>
+
+  <!-- add rating form -->

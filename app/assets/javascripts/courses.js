@@ -1,22 +1,22 @@
-$(function(){
-
+/*$(function(){
   $.ajaxSetup({
         cache: false,
     });
-
-    $.get(this.href).success(function(json){
-
-      var courses = $(".courses")
-      courses.html("")
-
+    //e.preventDefault();
+    $.ajax({
+      method: "GET",
+      url: this.action,
+      data: $(this).serialize(),
+      dataType: "json",
+      success: function(json){
       json.forEach(function(course){
-        text = '<a class="js-course-show" href="/courses/' + course.id + '">' + course.title + '</a>';
-        text += '<p class="course-meta">' + 'by' + ' ' + story.user.email + ' ' +'-' + ' ' + courses.created_at +
-                ' ' + '<span class="badge">' + course.reviews_count + ' ' +'reviews' + '</span></p>';
+        text = '<h2><a class="js-course-show" href="/courses/' + course.id + '">' + course.title + '</a></h2>';
         text += '<p>' + course.description.substring(0, 50) + '...';
         text += '<a class="js-course-show" href="/courses/' + course.id+ '">Read More</a></p>';
-        $courses.append(text);
+        text += '<small class="course-meta">' + 'by' + ' ' + course.user.email + ' ' +'-' + ' ' + course.created_at +
+                '</small>';
+        $("#indexCourses").append('<li>' + text + '</li>');
       })
-   })
-
-})
+    }
+  })
+})*/

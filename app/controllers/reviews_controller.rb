@@ -15,8 +15,12 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find_by(id: params[:id])
+    @review = @course.reviews.find_by(id: params[:id])
     #binding.pry
+    respond_to do |format|
+      format.html {render :index}
+      format.json { render json: @review, status:200 }
+    end
   end
 
   def new
