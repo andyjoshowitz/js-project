@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :authorize, only: [:edit, :update, :destroy]
 
   def index
-    @courses = Course.all
+    @courses = Course.all.order(created_at: :desc).page(params[:page])
 
     respond_to do |f|
       f.html {render :index}

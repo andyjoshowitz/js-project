@@ -1,2 +1,16 @@
-  <h1>Courses</h1>
-    <%= render partial: "courses/course_details_for_index", locals: {course: @course} %>
+
+
+<div class="course-header">
+  <div class="container">
+    <h1 class="course-title">Courses</h1>
+  </div>
+</div>
+
+  <div class="blog-post">
+      <%= page_entries_info @courses %>
+      <%= paginate @courses, window: 2 %>
+      <div class="courses">
+        <ol id=indexCourses>
+        </ol>
+      </div>
+  </div>
