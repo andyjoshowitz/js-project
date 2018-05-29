@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     # render json: @review, status: 201
     if @review.save
     #  render json: @review, status: 201
-      redirect_to @course
+      render 'reviews/show', :layout => false
     else
       # render json: @review.errors
       render 'courses/show'
