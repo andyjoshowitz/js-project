@@ -2,7 +2,13 @@ class InstructorsController < ApplicationController
   before_action :require_login, only: [:new, :create]
 
   def index
+
     @instructors = Instructor.all
+    @instructor = @instructors.find_by_id(1)
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @instructors, status: 200}
+    end
   end
 
   def new

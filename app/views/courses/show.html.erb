@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
 
-<div class="course-header">
-  <h1><%= @course.title %> (<%= @course.department %>-<%= @course.course_number %>)</h1>
-</div>
 
 <div id="showcourse">
-
+  <div class="course-header">
+    <h1><%= @course.title %> (<%= @course.department %>-<%= @course.course_number %>)</h1>
+  </div>
 </div>
 <h3>Instructor: <%= @course.instructor_name%></h3>
 
-<p><%= @course.description %></p>
+<p id"description"><%= @course.description %></p>
     <%= link_to "Edit course", edit_course_path(@course) if current_user.try(:admin?) || @course.user_id == current_user.try(:id) %><br>
     <%= link_to "All courses", courses_path, class: "btn btn-outline-dark" %>
 
@@ -28,12 +26,14 @@
 
 <!-- <%= link_to "Write a review", new_course_review_path(@course), :class => "new_review", :remote => true %> | -->
 <%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews" %>
-
-<div class=“reviews”>
-  <ol>
+<%= link_to "go to review show page", course_reviews_path(@course)%>
+<!-- <div id="test">
+  <%= render 'reviews/reviews' %>
+</div> -->
+<div>
+  <ol id="test">
   </ol>
 </div>
-
 
 
 <%= form_for([@course, @course.reviews.build]) do |f| %>

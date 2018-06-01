@@ -5,16 +5,18 @@ class ReviewsController < ApplicationController
   before_action :set_course
 
   def index
-    #@reviews = Review.where(course_id = params[:id])
+    @course = Course.find(params[:course_id])
     @reviews = @course.reviews
+
   	# render :json => @reviews
     respond_to do |format|
-      format.html {render :index}
       format.json { render json: @reviews, status:200 }
+      format.html {render :index}
     end
   end
 
   def show
+    @course = @course = Course.find(params[:course_id])
     @review = @course.reviews.find_by(id: params[:id])
     #binding.pry
     respond_to do |format|
@@ -29,16 +31,34 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @course.reviews.build(review_params)
-    # render json: @review, status: 201
-    if @review.save
-    #  render json: @review, status: 201
-      render 'reviews/show', :layout => false
-    else
-      # render json: @review.errors
-      render 'courses/show'
-    end
+   @review = @course.reviews.build(review_params)
+   # render json: @review, status: 201
+   if @review.save
+     respond_to do |format|
+       format.html { redirect_to @course }
+       format.json { render json: @review, status: 201 }
+     end
+     #render json: @review#, status: 201
+     #render 'reviews/show', :layout => false
+   else
+     # render json: @review.errors
+     render 'courses/show'
+   end
   end
+  # def create
+  #   @review = Review.new(review_params)
+  #   @course = Course.find_by(id: @review.course_id)
+  #   @review.user_id == current_user.id
+  #   if @review.save
+  #     respond_to do |format|
+  #       format.html { redirect_to @story }
+  #       format.json { render json: @comment, status: 201 }
+  #     end
+  #   else
+  #     flash[:notice] = "Oh no, something went wrong. Please try again!"
+  #     render root_path
+  #   end
+  # end
 
   def edit
     @course = Course.find_by(id: params[:course_id])

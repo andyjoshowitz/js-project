@@ -1,5 +1,6 @@
-<h1><%= @instructor.first_name%> <%=@instructor.second_name%></h1>
 
+
+<h1><%= @instructor.first_name%> <%=@instructor.second_name%></h1>
 
   <h3>Courses</h3>
     <ol>
@@ -16,6 +17,27 @@
       <% end %></li>
       </ol>
       <br>
-      <%= button_to "Add a Course", new_instructor_course_path %> <!--was "link_to" -->
+      <!-- <%= button_to "Add a Course", new_instructor_course_path %> was "link_to" -->
+      <!-- <%= form_for @instructor do |f| %>
+        <%= f.fields_for :courses, @instructor.courses.build do |course| %>
+        <%= course.hidden_field :user_id, value: current_user.id %>
+        <h3>New Course for <%= @instructor.full_name%> </h3>
+          <%= course.label :title %><br>
+          <%= course.text_field :title %>
+          <br>
+          <%= course.label :department %><br>
+          <%= course.text_field :department %>
+          <br>
+          <%= course.label :course_number %><br>
+          <%= course.text_field :course_number %>
+          <br>
+          <%= course.label :description %><br>
+          <%= course.text_area :description %>
+        <% end %>
+        <br>
+        <%= f.submit %> -->
+      <% end %>
       <%= button_to "Edit Instructor", edit_instructor_path, method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || @instructor.user_id == current_user.try(:id) %>
       <br>
+
+  <%= link_to "Next Instructor", instructor_path(@instructor.id + 1), :class => "next_instructor" %>
