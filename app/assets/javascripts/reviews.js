@@ -22,24 +22,24 @@ function getReviews(){
   })
 };
 
-$(function(){
-  $.ajaxSetup({
-        cache: false,
-    });
-  $("a.review_link").on("click", function(e){
-    e.preventDefault();
-    $.ajax({
-      method: "GET",
-      url: this.action,
-      data: $(this).serialize(),
-      dataType: "json",
-      success: function(reviews){
-        debugger
-        // if a#id = reviews.review.id then display etc...
-      }
-    })
-  })
-})
+// $(function(){
+//   $.ajaxSetup({
+//         cache: false,
+//     });
+//   $("a.review_link").on("click", function(e){
+//     e.preventDefault();
+//     $.ajax({
+//       method: "GET",
+//       url: this.action,
+//       data: $(this).serialize(),
+//       dataType: "json",
+//       success: function(reviews){
+//         debugger
+//         // if a#id = reviews.review.id then display etc...
+//       }
+//     })
+//   })
+// })
 
 // function createReview(){
 //   $("#new_review").on("submit", function(e){

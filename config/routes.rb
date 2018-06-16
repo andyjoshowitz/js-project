@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   get 'welcome/home'
   root 'welcome#home'
 
+  get '/instructors/:id/next', to: 'instructors#next_instructor'
+
+  get '/instrutors/:id/previous', to: 'instructors#previous_instructor'
+
 end

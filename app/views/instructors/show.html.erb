@@ -1,22 +1,24 @@
 
 
-<h1><%= @instructor.first_name%> <%=@instructor.second_name%></h1>
+<h1 class="instructorFirstName"><%= @instructor.first_name%></h1> <h1 class="instructorSecondName"><%=@instructor.second_name%></h1>
 
   <h3>Courses</h3>
-    <ol>
-      <% @instructor.courses.each do |course| %>
-        <li><h3><%= course.department%>-<%=course.title %></h3>
-        <p class="card-text"><%= course.description %></p>
-          <div class="btn-group">
-            <%= button_to "View", course_path(course), method: :get %>
-          </div>
-          <div class="btn-group">
-            <%= button_to "Edit", edit_course_path(course), method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || course.user_id == current_user.try(:id) %>
-          </div>
-          <small class="text-muted">Last updated: <br><%= course.updated_at.strftime("%m/%d/%Y") %></small>
-      <% end %></li>
-      </ol>
-      <br>
+    <div id="instructor-courses">
+      <ol>
+        <% @instructor.courses.each do |course| %>
+          <li><h3 class="instructorCourseDepartment"><%= course.department%></h3><h3 class="instructorCourseTitle">-<%=course.title %></h3>
+          <p class="card-text"><%= course.description %></p>
+            <div class="btn-group">
+              <%= button_to "View", course_path(course), method: :get %>
+            </div>
+            <div class="btn-group">
+              <%= button_to "Edit", edit_course_path(course), method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || course.user_id == current_user.try(:id) %>
+            </div>
+            <small class="text-muted">Last updated: <br><%= course.updated_at.strftime("%m/%d/%Y") %></small>
+        <% end %></li>
+        </ol>
+        <br>
+      </div>
       <!-- <%= button_to "Add a Course", new_instructor_course_path %> was "link_to" -->
       <!-- <%= form_for @instructor do |f| %>
         <%= f.fields_for :courses, @instructor.courses.build do |course| %>
@@ -40,4 +42,5 @@
       <%= button_to "Edit Instructor", edit_instructor_path, method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || @instructor.user_id == current_user.try(:id) %>
       <br>
 
-  <%= link_to "Next Instructor", instructor_path(@instructor.id + 1), :class => "next_instructor" %>
+      <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Previous Instructor</a><br><br>
+      <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Next Instructor</a><br><br>

@@ -4,11 +4,22 @@ class InstructorsController < ApplicationController
   def index
 
     @instructors = Instructor.all
-    @instructor = @instructors.find_by_id(1)
     respond_to do |f|
       f.html {render :index}
       f.json {render json: @instructors, status: 200}
     end
+  end
+
+  def next_instructor
+    @instructor = Instructor.find(params[:id])
+    @next_instructor = @instructor.next
+    render json: @next_instructor
+  end
+
+  def previous_instructor
+    @instructor = Instructor.find(params[:id])
+    @previous_instructor = @instructor.previous
+    render json: @previous_instructor
   end
 
   def new
