@@ -37,4 +37,21 @@ class Instructor < ApplicationRecord
     (self.reviews.collect{|r| r.instructor_quality}.inject(0){|sum,x| sum + x }/self.reviews.count.to_f).round(2)
   end
 
+  def next
+    # if the first destination is greater the current one exists then return the next destination
+    if next_dest = self.class.where("id > ?", id).first
+      next_dest
+    else
+      Instructor.first
+    end
+  end
+
+  def previous
+    # if the destination is less then current one exists then return the previous destination
+    if previous_dest = self.class.where("id < ?", id).last
+      previous_dest
+    else
+      Instructor.last
+    end
+  end
 end

@@ -1,7 +1,8 @@
+<h2>Reviews for <%= @course.full_title %> </h2>
+
 <ol>
   <% @reviews.each do |review| %>
     <li><%= link_to "Show review", course_review_path(@course, review), :class => "review_link", :id => review.id%></li>
-    <div class="display_review">
-    </div>
+
   <% end %>
 </ol>

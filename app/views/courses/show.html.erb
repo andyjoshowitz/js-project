@@ -26,10 +26,11 @@
 
 <!-- <%= link_to "Write a review", new_course_review_path(@course), :class => "new_review", :remote => true %> | -->
 <%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews" %>
-<!-- <%= link_to "go to review show page", course_reviews_path(@course)%> -->
-<div id="test">
+<br>
+<%= link_to "go to reviews show page", course_reviews_path(@course)%>
+<!-- <div id="test">
   <%= render 'reviews/reviews' %>
-</div>
+</div> -->
 <div>
   <ol id="test">
   </ol>

@@ -19,6 +19,6 @@ Rails.application.routes.draw do
 
   get '/instructors/:id/next', to: 'instructors#next_instructor'
 
-  get '/instrutors/:id/previous', to: 'instructors#previous_instructor'
+  get '/instructors/:id/previous', to: 'instructors#previous_instructor'
 
 end

@@ -1,8 +1,8 @@
 
 
-<h1 class="instructorFirstName"><%= @instructor.first_name%></h1> <h1 class="instructorSecondName"><%=@instructor.second_name%></h1>
+<h1 class="first-name"><%= @instructor.first_name%></h1> <h1 class="second-name"><%=@instructor.second_name%></h1>
 
-  <h3>Courses</h3>
+  <!-- <h3>Courses</h3>
     <div id="instructor-courses">
       <ol>
         <% @instructor.courses.each do |course| %>
@@ -18,7 +18,7 @@
         <% end %></li>
         </ol>
         <br>
-      </div>
+      </div> -->
       <!-- <%= button_to "Add a Course", new_instructor_course_path %> was "link_to" -->
       <!-- <%= form_for @instructor do |f| %>
         <%= f.fields_for :courses, @instructor.courses.build do |course| %>
