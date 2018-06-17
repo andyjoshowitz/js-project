@@ -39,28 +39,29 @@ function Review(attributes) {
 
 Review.prototype.renderReview = function() {
   var html = "";
-  html += '<li>' + '<a class="review_link" href="http://localhost:3000/courses/${json.id}/reviews/${review.id}">' + '${review.comment.substring(0,20) + "..."}' + '</li>';
-  return html;
+  html += '<li>' + '<a class="review_link" href="http://localhost:3000/courses/${this.course.id}/reviews/${this.id}">' + this.comment.substring(0,20) + "..." + '</li>';
+  $("#test").append(html);
 }
 
-$(function() {
+function createReview() {
   $("form#new_review").on("submit", function(event) {
     event.preventDefault();
-    $form = $(this);
-    url = this.action
-    data = $form.serialize();
+    var $form = $(this);
+    var url = "http://localhost:3000/courses/4/reviews.json";
+    var data = $form.serialize();
     $.ajax({
       method: "POST",
       url: url,
       data: data,
       success: function(data) {
+        debugger
         $("#test").val("");
         var review = new Review(data);
         review.renderReview();
       }
     })
   })
-})
+}
 
 
 
@@ -68,7 +69,7 @@ $(function() {
 
 $(document).ready(function() {
   getReviews();
-  //createReview();
+  createReview();
   // createProtoReview();
 //  showReview();
 });

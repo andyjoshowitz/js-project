@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   get 'instructors/:id/new_course', to: "instructors#new_course", as: "new_instructor_course"
 
   resources :instructors
+
   resources :courses do
     resources :reviews
   end
+  
   resources :users do
     resource :profile
   end

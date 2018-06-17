@@ -28,16 +28,14 @@
 <%= link_to "Load reviews", course_reviews_path(@course), :class => "load_reviews" %>
 <br>
 <%= link_to "go to reviews show page", course_reviews_path(@course)%>
-<!-- <div id="test">
-  <%= render 'reviews/reviews' %>
-</div> -->
+
 <div>
   <ol id="test">
   </ol>
 </div>
 
 
-<%= form_for([@course, @course.reviews.build]) do |f| %>
+<%= form_for([@course, @course.reviews.build], data: { disable_with: false }) do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :course_id, value: @course.id %>
   <label>How difficult was this course? (Enter 1 - 5)</label>
