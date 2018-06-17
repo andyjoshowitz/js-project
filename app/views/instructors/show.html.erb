@@ -16,6 +16,7 @@
                       <%= button_to "Edit", edit_course_path(course), method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || course.user_id == current_user.try(:id) %>
                     </div>
                     <small class="text-muted">Last updated: <br><%= course.updated_at.strftime("%m/%d/%Y") %></small> -->
+                  <%= link_to "View Course", course_path(course), method: :get %>
               </li>
           <% end %>
         </ol>
