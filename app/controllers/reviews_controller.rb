@@ -45,20 +45,6 @@ class ReviewsController < ApplicationController
      render 'courses/show'
    end
   end
-  # def create
-  #   @review = Review.new(review_params)
-  #   @course = Course.find_by(id: @review.course_id)
-  #   @review.user_id == current_user.id
-  #   if @review.save
-  #     respond_to do |format|
-  #       format.html { redirect_to @story }
-  #       format.json { render json: @comment, status: 201 }
-  #     end
-  #   else
-  #     flash[:notice] = "Oh no, something went wrong. Please try again!"
-  #     render root_path
-  #   end
-  # end
 
   def edit
     @course = Course.find_by(id: params[:course_id])
