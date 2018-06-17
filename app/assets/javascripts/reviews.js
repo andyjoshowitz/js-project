@@ -47,14 +47,14 @@ function createReview() {
   $("form#new_review").on("submit", function(event) {
     event.preventDefault();
     var $form = $(this);
-    var url = "http://localhost:3000/courses/4/reviews.json";
+    var url = this.action + "." + "json";
     var data = $form.serialize();
+    debugger
     $.ajax({
       method: "POST",
       url: url,
       data: data,
       success: function(data) {
-        debugger
         $("#test").val("");
         var review = new Review(data);
         review.renderReview();
@@ -64,7 +64,7 @@ function createReview() {
 }
 
 
-
+//"http://localhost:3000/courses/4/reviews.json"
 
 
 $(document).ready(function() {

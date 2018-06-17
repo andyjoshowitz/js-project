@@ -47,7 +47,7 @@ function loadInstructor(data) {
     var html = "" ;
     html += '<ol>' +'<li>' + '<h3 class="instructorCourseDepartment">' + this.department + "-" + this.course_number + ":" + this.title + '</h3>';
     html += '<p class="card-text">' + this.description + '</p>';
-    html += '<a class="course_link" href="http://localhost:3000/courses/${this.id}">' + "View Course" + '</a>';
+    html += '<a class="course_link" href="http://localhost:3000/courses/${this.id}" >' + "View Course" + '</a>';
     html += '</li>';
     html += '</ol>'
     $("#instructor-courses").append(html);
