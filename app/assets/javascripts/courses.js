@@ -13,7 +13,7 @@ $(function(){
         text = '<h2><a class="js-course-show" href="/courses/' + course.id + '">' + course.title + '</a></h2>';
         text += '<p>' + course.description.substring(0, 50) + '...' + '</p>';
         text += '<a class="js-course-show" href="/courses/' + course.id+ '">Read More</a></p>';
-        text += '<small class="course-meta">' + 'by' + ' ' + course.user.email + ' ' +
+        text += '<small class="course-meta">' + 'by' + ' ' + course.user.email +
                 '</small>';
         $("#indexCourses").append('<li>' + text + '</li>');
       })
