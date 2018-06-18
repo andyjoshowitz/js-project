@@ -1,7 +1,8 @@
 
 
 function loadInstructor(data) {
-      history.pushState({}, "", $(this).attr("href"));
+      history.pushState({}, "", "/instructors/" + data.id)
+      // $(this).attr("href")
       $(".first-name").text(data["first_name"]);
       $(".second-name").text(data["second_name"]);
       $(".js-next").attr("data-id", data["id"]);
