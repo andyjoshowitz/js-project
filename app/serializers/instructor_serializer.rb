@@ -7,10 +7,10 @@ class InstructorSerializer < ActiveModel::Serializer
       {
         id: course.id,
         instructor: {
-          id: course.instructor_id
+          id: course.instructor
         },
         user: {
-          id: course.user_id
+          id: course.user
         },
         description: course.description,
         title: course.title,

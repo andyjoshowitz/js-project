@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @profile = @user.try(:profile)
     @courses = @user.try(:profile).try(:courses)
-    @reviews = @user.try(:profile).try(:reviews)
+    # @reviews = @user.try(:profile).try(:reviews)
   end
 
   def new
@@ -38,7 +38,6 @@ class ProfilesController < ApplicationController
       render "edit"
     end
   end
-
 
   private
   def profile_params

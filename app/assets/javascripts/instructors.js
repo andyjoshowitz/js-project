@@ -1,9 +1,11 @@
+
+
 function loadInstructor(data) {
       history.pushState({}, "", "/instructors/" + data.id)
       $(".first-name").text(data["first_name"]);
       $(".second-name").text(data["second_name"]);
       $(".js-next").attr("data-id", data["id"]);
-      $(".js-previous").attr("data-id",data["id"]);
+      $(".js-previous").attr("data-id", data["id"]);
       $("#instructor-courses").empty();
       data["course_list"].forEach(function(element){
         var course = new Course(element);
@@ -13,23 +15,27 @@ function loadInstructor(data) {
 
 
   $(".js-next").on("click", function(event) {
+    event.preventDefault();
     var id = $(".js-next").attr("data-id")
     $.get("/instructors/" + id + "/next", function(data) {
-      //console.log(data)
+      console.log(data);
       loadInstructor(data);
     });
-    event.preventDefault();
+
   });
 
   $(".js-previous").on("click", function(event) {
     var id = $(".js-previous").attr("data-id")
     $.get("/instructors/" + id + "/previous", function(data) {
-      //console.log(data)
+      console.log(data);
       loadInstructor(data);
     });
     event.preventDefault();
 
   });
+
+  // <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Previous Instructor</a><br><br>
+  // <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Next Instructor</a><br><br>
 
   function Course(data) {
     this.id = data.id;
@@ -49,6 +55,6 @@ function loadInstructor(data) {
     html += '<p class="card-text">' + this.description + '</p>';
     html += '<a class="course_link" href="http://localhost:3000/courses/${this.id}" >' + "View Course" + '</a>';
     html += '</li>';
-    html += '</ol>'
+    html += '</ol>';
     $("#instructor-courses").append(html);
   }

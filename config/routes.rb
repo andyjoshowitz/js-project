@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'instructors/:id/courses', to: "instructors#courses", as: "instructor_courses_path"
-  get 'users/:user_id/courses', to: "users#courses", as: "user_courses"
+  get 'profiles/:user_id/courses', to: "profiles#courses", as: "user_courses"
   get 'instructors/:id/new_course', to: "instructors#new_course", as: "new_instructor_course"
 
   resources :instructors
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :courses do
     resources :reviews
   end
-  
+
   resources :users do
     resource :profile
   end

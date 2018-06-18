@@ -45,5 +45,5 @@
       <%= button_to "Edit Instructor", edit_instructor_path, method: :get, class: "btn btn-sm btn-outline-secondary" if current_user.try(:admin?) || @instructor.user_id == current_user.try(:id) %>
       <br>
 
-      <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Previous Instructor</a><br><br>
-      <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Next Instructor</a><br><br>
+      <a href="#" class="js-previous" data-id="<%=@instructor.id%>">View Previous Instructor</a><br><br>
+      <a href="#" class="js-next" data-id="<%=@instructor.id%>">View Next Instructor</a><br><br>

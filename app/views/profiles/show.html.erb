@@ -6,7 +6,12 @@
 <% else %>
   <h2><%= @profile.username.capitalize %></h2>
 
-  <h3>Your Courses</h3>
+  <h3><%= link_to "Your Courses", user_courses_path(@user), :class => "load_courses" %></h3>
+  <!-- <div>
+    <ol id="user_courses">
+    </ol>
+  </div>
+  <> -->
   <ol>
     <% @courses.each do |course| %>
       <li><h4><%= link_to course.full_title, course_path(course) %></h4>
