@@ -69,25 +69,4 @@ function createReview() {
 $(document).ready(function() {
   getReviews();
   createReview();
-  // createProtoReview();
-//  showReview();
 });
-
-
-// var showCourse= function() {
-//   $.ajax({
-//     method: "GET",
-//     url: this.action,
-//     data: $(this).serialize(),
-//     success: function(course){
-//       text = '<h2><a class="js-course-show" href="/courses/' + course.id + '">' + course.title + '</a></h2>';
-//       text += '<p>' + course.description + '...';
-//       text += '<a class="js-course-show" href="/courses/' + course.id+ '">Read More</a></p>';
-//       $("#showcourse").append('<div>' + text + '</div>');
-//     }
-//   })
-// }
-//
-// $(document).ready(function() {
-//   showCourse();
-// })
