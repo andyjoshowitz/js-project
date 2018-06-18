@@ -34,9 +34,6 @@ function loadInstructor(data) {
 
   });
 
-  // <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Previous Instructor</a><br><br>
-  // <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@instructor.id%>">View Next Instructor</a><br><br>
-
   function Course(data) {
     this.id = data.id;
     this.instructor = data.instructor;
