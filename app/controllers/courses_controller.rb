@@ -24,10 +24,10 @@ class CoursesController < ApplicationController
     #render json: @course, status: 200
   end
 
-  def new
-    # @course = Course.new
-    # @course.build_intructor()
-  end
+  # def new
+  #   @course = Course.new
+  #   @course.build_intructor()
+  # end
 
   #def create
   #  @course = Course.new(course_params)
