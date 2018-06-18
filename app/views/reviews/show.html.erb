@@ -1,14 +1,18 @@
 <h2=class></h2>
   <div class="review-box card rounded">
     <h4 class="ratings">Ratings</h4>
-      <p>Course Difficulty: <%=review.difficulty%> | Instructor Quality: <%=review.instructor_quality%> | Amount Learned: <%=review.amount_learned%></li> | Workload: <%=review.work_amount%></li> | Course Quality: <%=review.course_quality%></p>
+      <p>Course Difficulty: <%=@review.difficulty%> | Instructor Quality: <%=@review.instructor_quality%> | Amount Learned: <%=@review.amount_learned%></li> | Workload: <%=@review.work_amount%></li> | Course Quality: <%=@review.course_quality%></p>
     <h4>Comment</h4>
-      <p><%= review.comment %></p>
-    <p><%= link_to review.user.email, user_profile_path(review.user) %> | <%= last_updated review %></p>
+      <p><%= @review.comment %></p>
+    <p><%= link_to @review.user.email, user_profile_path(@review.user) %> | <%= last_updated @review %></p>
   </div>
-  <% if current_user == review.user %>
-    <%= link_to "Edit your review", edit_course_review_path(id: review.id, course_id: @course.id) %>
+  <% if current_user == @review.user %>
+    <%= link_to "Edit your review", edit_course_review_path(id: @review.id, course_id: @course.id) %>
      |
-    <%= link_to "Delete your review", course_review_path(@course, review), :method => :delete %>
+    <%= link_to "Delete your review", course_review_path(@course, @review), :method => :delete %>
   <% end %>
+  <br><br>
+  <%= link_to "Back to Course", course_path(@course) %>
+  <br>
+  <%= link_to "List of Course Reviews", course_reviews_path(@course) %>
   <br><br>

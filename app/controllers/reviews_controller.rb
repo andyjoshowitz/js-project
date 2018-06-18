@@ -18,11 +18,6 @@ class ReviewsController < ApplicationController
   def show
     @course = @course = Course.find(params[:course_id])
     @review = @course.reviews.find_by(id: params[:id])
-    #binding.pry
-    respond_to do |format|
-      format.html {render :index}
-      format.json { render json: @review, status:200 }
-    end
   end
 
   def new
@@ -38,10 +33,7 @@ class ReviewsController < ApplicationController
        format.html { redirect_to @course }
        format.json { render json: @review, status: 201 }
      end
-     #render json: @review#, status: 201
-     #render 'reviews/show', :layout => false
    else
-     # render json: @review.errors
      render 'courses/show'
    end
   end
