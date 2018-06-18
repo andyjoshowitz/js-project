@@ -84,38 +84,10 @@ function createReview() {
   })
 }
 
-// function showReviews(){
-//   $.ajaxSetup({
-//         cache: false,
-//     });
-//   $("a.review_link").on("click", function(e){
-//     e.preventDefault();
-//     debugger
-//     $.ajax({
-//       method: "GET",
-//       url: this.action,
-//       data: $(this).serialize(),
-//       dataType: "json",
-//       success: function(review){
-//
-//         var html = "";
-//         html += '<div class="review-box card rounded">'
-//         html += '<p>' + "Course Difficulty" + review.difficulty + " " + "|" + " " + "Instructor Quality" + review.instructor_quality + " " + "|" + " " + "Amount Learned" + review.amount_learned + " " + "|" + " "
-//         html += "Workload" + review.work_amount + " " + "|" + " " + "Overall Quality" + review.course_quality + '<p>'
-//         html += '<h4>' + "Comment:" + '</h4>'
-//         html += '<p>' + review.comment + '</p>'
-//           $(".show_review").append(html);
-//       }
-//     })
-//   })
-// };
-
-
 //"http://localhost:3000/courses/4/reviews.json"
 
 
 $(document).ready(function() {
   getReviews();
   createReview();
-  showReviews();
 });
