@@ -29,8 +29,6 @@ class InstructorsController < ApplicationController
 
   def create
     @instructor = Instructor.new(instructor_params)
-    # @instructor.courses.first.user = current_user
-    # binding.pry
     if @instructor.save
       redirect_to @instructor
     else
@@ -64,7 +62,6 @@ class InstructorsController < ApplicationController
   def new_course
     @instructor = Instructor.find_by(id: params[:id])
     @course = @instructor.courses.build
-    # @course.user = current_user
   end
 
   private
